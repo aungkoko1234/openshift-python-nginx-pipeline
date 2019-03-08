@@ -63,10 +63,12 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
+                    sh "oc project dev"
+                    sh "oc get bc"
                     openshift.withCluster() {
                         openshift.withProject(env.DEV_PROJECT) {
                              echo "Using project: ${openshift.project()}"
-                              echo "Hello from project ${openshift.project()} in cluster ${openshift.cluster()}"
+                             echo "Hello from project ${openshift.project()} in cluster ${openshift.cluster()}"
                              openshift.selector( 'buildconfig/python-nginx' ).describe() 
                             //openshift.selector("bc", "$TEMPLATE_NAME").startBuild("--from-archive=${ARTIFACT_FOLDER}/${APPLICATION_NAME}_${BUILD_NUMBER}.tar.gz", "--wait=true")
                               openshiftBuild(buildConfig:'python-nginx', showBuildLogs: 'true',fromArchive:"${ARTIFACT_FOLDER}/${APPLICATION_NAME}_${BUILD_NUMBER}.tar.gz",wait:true)
