@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
         APPLICATION_NAME = 'python-nginx'
-        GIT_REPO="http://github.com/ruddra/openshift-python-nginx.git"
+        GIT_REPO="http://github.com/aungkoko1234/openshift-python-nginx.git"
         GIT_BRANCH="master"
         STAGE_TAG = "promoteToQA"
         DEV_PROJECT = "dev"
@@ -61,15 +61,15 @@ pipeline {
             }
         }
         stage('Create Image Builder') {
-            when {
-                expression {
-                    openshift.withCluster() {
-                        openshift.withProject(DEV_PROJECT) {
-                            return !openshift.selector("bc", "${TEMPLATE_NAME}").exists();
-                        }
-                }
-            }
-        }
+            //when {
+                //expression {
+                    //openshift.withCluster() {
+                        //openshift.withProject(DEV_PROJECT) {
+                            //return !openshift.selector("bc", "${TEMPLATE_NAME}").exists();
+                        //}
+                //}
+            //}
+        //}
         steps {
             script {
                 openshift.withCluster() {
