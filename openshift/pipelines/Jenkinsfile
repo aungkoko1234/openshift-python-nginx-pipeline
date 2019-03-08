@@ -64,7 +64,6 @@ pipeline {
             steps {
                 script {
                     sh "oc project dev"
-                    sh "oc whoami"
                     sh "oc get all"
                     sh "oc get bc"
                     openshift.withCluster() {
