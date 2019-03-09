@@ -65,6 +65,7 @@ pipeline {
                 script {
                     sh "oc project dev"
                     sh "oc get all"
+                    sh "oc version"
                     sh "oc get bc"
                     openshift.withCluster() {
                         openshift.withProject(env.DEV_PROJECT) {
